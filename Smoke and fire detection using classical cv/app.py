@@ -1,32 +1,3 @@
-import sys
-import subprocess
-import importlib
-
-_REQUIRED = {
-    "cv2":         "opencv-python",
-    "numpy":       "numpy",
-    "torch":       "torch",
-    "torchvision": "torchvision",
-    "PIL":         "pillow",
-    "ultralytics": "ultralytics",
-}
-
-def _auto_install():
-    missing = []
-    for module, package in _REQUIRED.items():
-        try:
-            importlib.import_module(module)
-        except ImportError:
-            missing.append(package)
-    if missing:
-        print(f"\n[SETUP] Installing missing packages: {', '.join(missing)}")
-        subprocess.check_call(
-            [sys.executable, "-m", "pip", "install", "--quiet"] + missing
-        )
-        print("[SETUP] Installation complete.\n")
-
-_auto_install()
-
 # ──────────────────────────────────────────────────────────────────────────────
 #  STANDARD IMPORTS
 # ──────────────────────────────────────────────────────────────────────────────
@@ -35,7 +6,6 @@ import os
 import time
 import math
 import argparse
-import warnings
 import collections
 from datetime import datetime
 from collections import deque, defaultdict
@@ -44,7 +14,6 @@ import cv2
 import numpy as np
 import torch
 
-warnings.filterwarnings("ignore")
 
 # ──────────────────────────────────────────────────────────────────────────────
 #  CONFIGURATION
